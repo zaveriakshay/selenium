@@ -55,7 +55,7 @@ def waitForURL(browser, waitOnThisURL):
 
 def createBrowser():
     browser = webdriver.Chrome(
-        r"resources\selenium\webdriver\chrome\x86\chromedriver.exe")
+        r"F:\Developer\Workspace\Python\selenium\resources\selenium\webdriver\chrome\x86\chromedriver.exe")
     return browser
 
 
