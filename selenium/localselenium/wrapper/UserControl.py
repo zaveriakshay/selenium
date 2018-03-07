@@ -1,6 +1,9 @@
 from selenium import webdriver
+import time
 from selenium.webdriver.support.ui import Select
 
+def pauseForSeconds(seconds):
+    time.sleep(seconds)
 
 def fillTextFieldById(browser, id, value):
     print("fillTextFieldById:in:" + id + ":" + value)
@@ -21,6 +24,7 @@ def selectDropDownByIdAndOptionValue(browser, id, value):
 
 def clickCheckBoxById(browser, id):
     print("selectCheckBoxById:in:" + id)
+    pauseForSeconds(2)
     browser.find_element_by_id(id).click()
     print("selectCheckBoxById:out:")
 
@@ -46,6 +50,7 @@ def clickButtonByXpath(browser, xPath):
 def waitForURL(browser, waitOnThisURL):
     print("waitForURL:in:" + waitOnThisURL)
     while True:
+        pauseForSeconds(3)
         if waitOnThisURL not in browser.current_url:
             print(browser.current_url)
         elif waitOnThisURL in browser.current_url:
@@ -65,6 +70,7 @@ def loadURL(browser, url):
 
 def clickHrefId(browser, id):
     print("clickHrefId:in:" + id)
+    pauseForSeconds(2)
     browser.find_element_by_id(id).click()
     print("clickHrefId:out:")
 
@@ -91,6 +97,7 @@ def findInputValueByCssSelector(browser, cssSelector):
     value = inputElement.get_attribute('value')
     print("findInputValueByCssSelector:out:" + ":" + value)
     return value
+
 
 def findInputValueByClassName(browser, className):
     print("findInputValueByClassName:in:" + ":" + className)

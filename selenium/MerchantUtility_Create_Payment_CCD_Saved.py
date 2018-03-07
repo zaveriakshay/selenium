@@ -27,7 +27,7 @@ def makeSavedCCDPayment(browser, rowIndex, readSheet, writeSheet):
     clickButtonById(browser, "paymentForm:payNow")
     waitForURL(browser, "merchantUtility/NPayResponse.jsp")
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
-    writeSheet.write(rowIndex, 15, responseXML)
+    writeSheet.write(rowIndex, 18, responseXML)
 
 
 '''
