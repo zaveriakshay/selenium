@@ -7,6 +7,7 @@
 from MerchantUtility_Create_Payment import *
 from PaymentZone_Wallet_Login import *
 from localselenium.wrapper.UserControl import *
+import xml.etree.ElementTree as ET
 
 
 def makeECAPayment(browser, rowIndex, readSheet, writeSheet):
@@ -23,6 +24,8 @@ def makeECAPayment(browser, rowIndex, readSheet, writeSheet):
     clickButtonById(browser, "paymentForm:payNow")
     waitForURL(browser, "merchantUtility/NPayResponse.jsp")
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
+    root = ET.fromstring(responseXML)
+    print(root.tag)
     writeSheet.write(rowIndex, 18, responseXML)
 
 
