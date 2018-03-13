@@ -4,12 +4,11 @@
 # url="http://94.200.29.187:5115/paymentZone/PaymentService/Payment?WSDL"
 # client = Client(url)
 # print (client)
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
+from localselenium.wrapper.UserControl import *
+
 from MerchantUtility_Create_Payment import *
 from PaymentZone_Wallet_Login import *
-from localselenium.wrapper.UserControl import *
+from Read_XML import xmlObject
 
 
 def makeSavedCCDPayment(browser, rowIndex, readSheet, writeSheet):
@@ -27,6 +26,9 @@ def makeSavedCCDPayment(browser, rowIndex, readSheet, writeSheet):
     clickButtonById(browser, "paymentForm:payNow")
     waitForURL(browser, "merchantUtility/NPayResponse.jsp")
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
+    xmlInstance = xmlObject(responseXML)
+    transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
+    writeSheet.write(rowIndex, 17, transactionRef)
     writeSheet.write(rowIndex, 18, responseXML)
 
 

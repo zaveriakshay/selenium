@@ -4,9 +4,6 @@
 # url="http://94.200.29.187:5115/paymentZone/PaymentService/Payment?WSDL"
 # client = Client(url)
 # print (client)
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
 
 
 def paymentZoneWalletLogin_EnterWallet(driver, wallet):

@@ -4,15 +4,10 @@
 # url="http://94.200.29.187:5115/paymentZone/PaymentService/Payment?WSDL"
 # client = Client(url)
 # print (client)
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from MerchantUtility_Create_Payment import *
-from PaymentZone_Wallet_Login import *
 from localselenium.wrapper.UserControl import *
+
+from MerchantUtility_Create_Payment import *
+from Read_XML import xmlObject
 
 
 def makeUnregisteredCCDPayment(browser, rowIndex, readSheet, writeSheet):
@@ -36,6 +31,9 @@ def makeUnregisteredCCDPayment(browser, rowIndex, readSheet, writeSheet):
     clickButtonByXpath(browser, "//input[@type='submit' and @value='Submit']")
     waitForURL(browser, "merchantUtility/NPayResponse.jsp")
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
+    xmlInstance = xmlObject(responseXML)
+    transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
+    writeSheet.write(rowIndex, 17, transactionRef)
     writeSheet.write(rowIndex, 18, responseXML)
 
 
