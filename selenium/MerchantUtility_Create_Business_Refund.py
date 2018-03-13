@@ -19,7 +19,7 @@ def merchantUtilitySelectMerchant(browser, merchant):
 
 
 def merchantUtilityRefundtSubmit(browser):
-    clickButtonByXpath(browser, "//input[@type='submit' and @value='Generate Reversal']")
+    clickButtonByXpath(browser, "//input[@type='submit' and @value='General Reversal']")
     print("merchant page was submit")
 
 def makeBusinessRefund(browser, rowIndex, readSheet, writeSheet):
@@ -32,18 +32,15 @@ def makeBusinessRefund(browser, rowIndex, readSheet, writeSheet):
     if readSheet.cell(rowIndex, 20).value == "ECA":
         fillTextFieldById(browser, "walletId", readSheet.cell(rowIndex, 21).value)
     elif readSheet.cell(rowIndex, 20).value == "BKT":
-        fillTextFieldById(browser, "beneNameId", readSheet.cell(rowIndex, 24).value)
+        fillTextFieldById(browser, "beneNameId", readSheet.cell(rowIndex, 22).value)
         fillTextFieldById(browser, "beneBankCountryId", readSheet.cell(rowIndex, 23).value)
         fillTextFieldById(browser, "IBANNoId", readSheet.cell(rowIndex, 24).value)
 
     merchantUtilityRefundtSubmit(browser)
-    waitForURL(browser, "merchantUtility/NPayResponse.jsp")
+    waitForURL(browser, "merchantUtility/TransactionReversalSubmit.jsp")
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
-    '''xmlInstance = xmlObject(responseXML)
-transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
-writeSheet.write(rowIndex, 17, transactionRef)'''
+    xmlInstance = xmlObject(responseXML)
+    transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/TxnReversalRes/Transfer/NoqodiRevRefNo')
+    writeSheet.write(rowIndex, 25, transactionRef)
     writeSheet.write(rowIndex, 26, responseXML)
 
-
-'''browser = createBrowser()
-makeECAPayment(browser)'''

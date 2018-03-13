@@ -8,7 +8,7 @@ from MerchantUtility_Create_Payment_DDB import *
 from MerchantUtility_Create_Payment_ECA import *
 from MerchantUtility_Create_Business_Refund import *
 
-workbook = xlrd.open_workbook(r"test\data\Payments.xlsx")
+workbook = xlrd.open_workbook(r"test\data\Payments.xls")
 sheet = workbook.sheet_by_index(0)
 writeWorkBook = copy(workbook)
 w_sheet = writeWorkBook.get_sheet(0)
@@ -26,10 +26,12 @@ for row in range(1, sheet.nrows):
         makeDDBPayment(browser, row, sheet, w_sheet)
     elif sheet.cell(row, 4).value == "EXIT":
         break
+    elif sheet.cell(row, 4).value == "NA":
+        continue
 
     if "REVERSAL" in sheet.cell(row, 0).value:
-        writeWorkBook.save(r"test\data\Payments.xlsx")
+        writeWorkBook.save(r"test\data\Payments.xls")
         makeBusinessRefund(browser, row, sheet, w_sheet)
 
-writeWorkBook.save(r"test\data\Payments.xlsx")
-browser.close();
+writeWorkBook.save(r"test\data\Payments.xls")
+#browser.close();
