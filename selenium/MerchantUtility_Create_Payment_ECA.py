@@ -4,16 +4,14 @@
 # url="http://94.200.29.187:5115/paymentZone/PaymentService/Payment?WSDL"
 # client = Client(url)
 # print (client)
-from localselenium.wrapper.UserControl import *
-
+from AppConstants import *
 from MerchantUtility_Create_Payment import *
 from PaymentZone_Wallet_Login import *
-from Read_XML import xmlObject
-from AppConstants import  *
+from Read_Excel import Payment
 
 
 def makeECAPayment(browser, rowIndex, readSheet, writeSheet):
-    loadURL(browser, HOST+"/PaymentForm.jsp")
+    loadURL(browser, HOST + "/PaymentForm.jsp")
     merchantUtilitySelectMerchant(browser, readSheet.cell(rowIndex, MERCHANT_CODE).value)
     merchantUtilityPaymentEnterAmount(browser, readSheet.cell(rowIndex, PAYMENT_AMOUNT).value)
     merchantTxnId = findInputValueById(browser, "txnID")
@@ -29,7 +27,21 @@ def makeECAPayment(browser, rowIndex, readSheet, writeSheet):
     handleResponse(responseXML, rowIndex, writeSheet)
 
 
-
+def makeECAPayment(browser, payment: Payment):
+    loadURL(browser, HOST + "/PaymentForm.jsp")
+    merchantUtilitySelectMerchant(browser, payment.merchantCode)
+    merchantUtilityPaymentEnterAmount(browser, payment.paymentAmount)
+    merchantTxnId = findInputValueById(browser, "txnID")
+    payment.merchantRef = merchantTxnId
+    merchantUtilityPaymentSubmit(browser)
+    paymentZoneWalletLogin_EnterWallet(browser, payment.walletId)
+    paymentZoneWalletLogin_EnterPassword(browser, payment.walletId)
+    paymentZoneWalletLogin_Submit(browser)
+    fillTextFieldById(browser, "paymentForm:dw_payment_details", payment.paymentRemark)
+    clickButtonById(browser, "paymentForm:payNow")
+    waitForURL(browser, "merchantUtility/NPayResponse.jsp")
+    responseXML = findInputValueByClassName(browser, "input-xxlarge")
+    handleResponse(responseXML, payment)
 
 
 '''browser = createBrowser()

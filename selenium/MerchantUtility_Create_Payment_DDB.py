@@ -8,11 +8,11 @@ from localselenium.wrapper.UserControl import *
 
 from MerchantUtility_Create_Payment import *
 from Read_XML import xmlObject
-from AppConstants import  *
+from AppConstants import *
 
 
 def makeDDBPayment(browser, rowIndex, readSheet, writeSheet):
-    loadURL(browser, HOST+"/PaymentForm.jsp")
+    loadURL(browser, HOST + "/PaymentForm.jsp")
     merchantUtilitySelectMerchant(browser, readSheet.cell(rowIndex, MERCHANT_CODE).value)
     merchantUtilityPaymentEnterAmount(browser, readSheet.cell(rowIndex, PAYMENT_AMOUNT).value)
     merchantTxnId = findInputValueById(browser, "txnID")
@@ -25,12 +25,23 @@ def makeDDBPayment(browser, rowIndex, readSheet, writeSheet):
     fillTextFieldById(browser, "paymentForm:ddbEmail", readSheet.cell(rowIndex, DDB_EMAIL).value)
     fillTextFieldById(browser, "paymentForm:ddbPaymentDetails", readSheet.cell(rowIndex, PAYMENT_REMARKS).value)
     clickButtonById(browser, "paymentForm:payNow")
-    '''waitForURL(browser, "bne-stripe2.ap.gateway.mastercard.com/acs/MastercardACS")
-    clickButtonByXpath(browser, "//input[@type='submit' and @value='Submit']")
-    waitForURL(browser, "merchantUtility/NPayResponse.jsp")'''
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
     handleResponse(responseXML, rowIndex, writeSheet)
 
 
-'''browser = createBrowser()
-makeECAPayment(browser)'''
+def makeDDBPayment(browser, payment: Payment):
+    loadURL(browser, HOST + "/PaymentForm.jsp")
+    merchantUtilitySelectMerchant(browser, payment.merchantCode)
+    merchantUtilityPaymentEnterAmount(browser, payment.paymentAmount)
+    merchantTxnId = findInputValueById(browser, "txnID")
+    payment.merchantRef = merchantTxnId
+    merchantUtilityPaymentSubmit(browser)
+    clickHrefId(browser, "paymentForm:netBankPmtLink");
+    selectDropDownByIdAndOptionValue(browser, "paymentForm:ddbBank", payment.ddbBank)
+    clickCheckBoxById(browser, "paymentForm:ddbTerms")
+    fillTextFieldById(browser, "paymentForm:ddbName", payment.ddbName)
+    fillTextFieldById(browser, "paymentForm:ddbEmail", payment.ddbEmail)
+    fillTextFieldById(browser, "paymentForm:ddbPaymentDetails", payment.paymentRemark)
+    clickButtonById(browser, "paymentForm:payNow")
+    responseXML = findInputValueByClassName(browser, "input-xxlarge")
+    handleResponse(responseXML, payment)

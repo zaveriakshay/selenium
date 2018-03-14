@@ -12,7 +12,7 @@ from AppConstants import *
 
 
 def makeUnregisteredCCDPayment(browser, rowIndex, readSheet, writeSheet):
-    loadURL(browser, HOST+"/PaymentForm.jsp")
+    loadURL(browser, HOST + "/PaymentForm.jsp")
     merchantUtilitySelectMerchant(browser, readSheet.cell(rowIndex, MERCHANT_CODE).value)
     merchantUtilityPaymentEnterAmount(browser, readSheet.cell(rowIndex, PAYMENT_AMOUNT).value)
     merchantTxnId = findInputValueById(browser, "txnID")
@@ -35,6 +35,25 @@ def makeUnregisteredCCDPayment(browser, rowIndex, readSheet, writeSheet):
     handleResponse(responseXML, rowIndex, writeSheet)
 
 
-'''browser = createBrowser()
-makeUnregisteredCCDPayment(browser)
-'''
+def makeUnregisteredCCDPayment(browser, payment: Payment):
+    loadURL(browser, HOST + "/PaymentForm.jsp")
+    merchantUtilitySelectMerchant(browser, payment.merchantCode)
+    merchantUtilityPaymentEnterAmount(browser, payment.paymentAmount)
+    merchantTxnId = findInputValueById(browser, "txnID")
+    payment.merchantRef = merchantTxnId
+    merchantUtilityPaymentSubmit(browser)
+    clickHrefId(browser, "paymentForm:ccdPmtLink");
+    fillTextFieldById(browser, "paymentForm:ccdNumber", payment.ccdNumber)
+    fillTextFieldById(browser, "paymentForm:ccdHolderName", payment.ccdHolderName)
+    selectDropDownByIdAndOptionValue(browser, "paymentForm:ccdExpiryDateMM", payment.ccdExpiryMonth)
+    clickCheckBoxById(browser, "paymentForm:ccdTerms")
+    selectDropDownByIdAndOptionValue(browser, "paymentForm:ccdExpiryDateYYYY", payment.ccdExpiryYear)
+    fillTextFieldById(browser, "paymentForm:ccdCVV", payment.ccdCvv)
+    fillTextFieldById(browser, "paymentForm:ccdEmail", payment.ccdEmail)
+    fillTextFieldById(browser, "paymentForm:ccdPaymentDetails", payment.paymentRemark)
+    clickButtonById(browser, "paymentForm:payNow")
+    waitForURL(browser, "ap.gateway.mastercard.com/acs/MastercardACS")
+    clickButtonByXpath(browser, "//input[@type='submit' and @value='Submit']")
+    waitForURL(browser, "merchantUtility/NPayResponse.jsp")
+    responseXML = findInputValueByClassName(browser, "input-xxlarge")
+    handleResponse(responseXML, payment)

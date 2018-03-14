@@ -70,7 +70,7 @@ def excelToPayment():
     executable = {}
     templatePayment = {}
     templateRefund = {}
-    for rowIndex in range(sheet_test.min_row + 1, sheet_test.max_row):
+    for rowIndex in range(sheet_test.min_row + 1, sheet_test.max_row+1):
         if sheet_test.cell(row=rowIndex, column=1).value == "PAYMENT":
             executable = Payment()
             templatePayment = Payment()
@@ -95,28 +95,32 @@ def excelToPayment():
     return {"templateRefund": templateRefund, "templatePayment": templatePayment, "executableList": executableList}
 
 
+def saveObjectToExccel(executable_list_, template_payment_, template_refund_):
+    wb = openpyxl.load_workbook('test/data/Payments.xlsx')
+    #wb.create_sheet(index=0, title='PaymentsOutput')
+    sheet_test = wb["Payments"]
+    rowIndex = 0
+    for executable in executable_list_:
+        for propertyName in dir(executable):
+            if not propertyName.startswith('__'):
+                if isinstance(executable, Payment):
+                    property_index_ = getattr(template_payment_, propertyName)
+                    rowIndex = getattr(executable, "sequence")
+                elif isinstance(executable, Refund):
+                    property_index_ = getattr(template_refund_, propertyName)
+                    rowIndex = getattr(executable, "sequence")
+
+                print(rowIndex + "<<>>" + propertyName + "<<>>" + str(property_index_) + "<<>>" + str(
+                    getattr(executable, propertyName)))
+                if "beneficiaryList" not in propertyName:
+                    sheet_test.cell(row=int(rowIndex)+1, column=int(str(property_index_))).value = str(
+                        getattr(executable, propertyName))
+    wb.save('test/data/Payments.xlsx')
+
+
 paymentOrRefund = excelToPayment()
 print(paymentOrRefund)
 template_refund_ = paymentOrRefund["templateRefund"]
 template_payment_ = paymentOrRefund["templatePayment"]
 executable_list_ = paymentOrRefund["executableList"]
-
-wb = openpyxl.load_workbook('test/data/Payments.xlsx')
-wb.create_sheet(index=0, title='PaymentsOutput')
-sheet_test = wb["PaymentsOutput"]
-rowIndex = 0
-for executable in executable_list_:
-    for propertyName in dir(executable):
-        if not propertyName.startswith('__'):
-            if isinstance(executable, Payment):
-                property_index_ = getattr(template_payment_, propertyName)
-                rowIndex = getattr(executable, "sequence")
-            elif isinstance(executable, Refund):
-                property_index_ = getattr(template_refund_, propertyName)
-                rowIndex = getattr(executable, "sequence")
-            print(rowIndex+"<<>>"+propertyName+"<<>>"+str(property_index_) + "<<>>" + str(getattr(executable, propertyName)))
-            if "beneficiaryList" not in propertyName:
-                sheet_test.cell(row=int(rowIndex), column=int(str(property_index_))).value = str(
-                    getattr(executable, propertyName))
-
-wb.save('test/data/Payments.xlsx')
+saveObjectToExccel(executable_list_, template_payment_, template_refund_)
