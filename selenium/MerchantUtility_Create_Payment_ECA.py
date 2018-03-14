@@ -9,26 +9,27 @@ from localselenium.wrapper.UserControl import *
 from MerchantUtility_Create_Payment import *
 from PaymentZone_Wallet_Login import *
 from Read_XML import xmlObject
+from AppConstants import  *
 
 
 def makeECAPayment(browser, rowIndex, readSheet, writeSheet):
-    loadURL(browser, "https://www.testepg.ae/merchantUtility/PaymentForm.jsp")
-    merchantUtilitySelectMerchant(browser, readSheet.cell(rowIndex, 1).value)
-    merchantUtilityPaymentEnterAmount(browser, readSheet.cell(rowIndex, 2).value)
+    loadURL(browser, HOST+"/PaymentForm.jsp")
+    merchantUtilitySelectMerchant(browser, readSheet.cell(rowIndex, MERCHANT_CODE).value)
+    merchantUtilityPaymentEnterAmount(browser, readSheet.cell(rowIndex, PAYMENT_AMOUNT).value)
     merchantTxnId = findInputValueById(browser, "txnID")
-    writeSheet.write(rowIndex, 3, merchantTxnId)
+    writeSheet.write(rowIndex, MERCHANT_REF, merchantTxnId)
     merchantUtilityPaymentSubmit(browser)
-    paymentZoneWalletLogin_EnterWallet(browser, readSheet.cell(rowIndex, 5).value)
-    paymentZoneWalletLogin_EnterPassword(browser, readSheet.cell(rowIndex, 6).value)
+    paymentZoneWalletLogin_EnterWallet(browser, readSheet.cell(rowIndex, WALLET_ID).value)
+    paymentZoneWalletLogin_EnterPassword(browser, readSheet.cell(rowIndex, PASSWORD).value)
     paymentZoneWalletLogin_Submit(browser)
-    fillTextFieldById(browser, "paymentForm:dw_payment_details", readSheet.cell(rowIndex, 7).value)
+    fillTextFieldById(browser, "paymentForm:dw_payment_details", readSheet.cell(rowIndex, PAYMENT_REMARKS).value)
     clickButtonById(browser, "paymentForm:payNow")
     waitForURL(browser, "merchantUtility/NPayResponse.jsp")
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
-    xmlInstance = xmlObject(responseXML)
-    transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
-    writeSheet.write(rowIndex, 17, transactionRef)
-    writeSheet.write(rowIndex, 18, responseXML)
+    handleResponse(responseXML, rowIndex, writeSheet)
+
+
+
 
 
 '''browser = createBrowser()

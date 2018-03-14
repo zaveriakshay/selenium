@@ -8,33 +8,31 @@ from localselenium.wrapper.UserControl import *
 
 from MerchantUtility_Create_Payment import *
 from Read_XML import xmlObject
+from AppConstants import *
 
 
 def makeUnregisteredCCDPayment(browser, rowIndex, readSheet, writeSheet):
-    loadURL(browser, "https://www.testepg.ae/merchantUtility/PaymentForm.jsp")
-    merchantUtilitySelectMerchant(browser, readSheet.cell(rowIndex, 1).value)
-    merchantUtilityPaymentEnterAmount(browser, readSheet.cell(rowIndex, 2).value)
+    loadURL(browser, HOST+"/PaymentForm.jsp")
+    merchantUtilitySelectMerchant(browser, readSheet.cell(rowIndex, MERCHANT_CODE).value)
+    merchantUtilityPaymentEnterAmount(browser, readSheet.cell(rowIndex, PAYMENT_AMOUNT).value)
     merchantTxnId = findInputValueById(browser, "txnID")
-    writeSheet.write(rowIndex, 3, merchantTxnId)
+    writeSheet.write(rowIndex, MERCHANT_REF, merchantTxnId)
     merchantUtilityPaymentSubmit(browser)
     clickHrefId(browser, "paymentForm:ccdPmtLink");
-    fillTextFieldById(browser, "paymentForm:ccdNumber", readSheet.cell(rowIndex, 8).value)
-    fillTextFieldById(browser, "paymentForm:ccdHolderName", readSheet.cell(rowIndex, 11).value)
-    selectDropDownByIdAndOptionValue(browser, "paymentForm:ccdExpiryDateMM", readSheet.cell(rowIndex, 9).value)
+    fillTextFieldById(browser, "paymentForm:ccdNumber", readSheet.cell(rowIndex, CCD_NUMBER).value)
+    fillTextFieldById(browser, "paymentForm:ccdHolderName", readSheet.cell(rowIndex, CCD_HOLDER_NAME).value)
+    selectDropDownByIdAndOptionValue(browser, "paymentForm:ccdExpiryDateMM", readSheet.cell(rowIndex, CCD_MONTH).value)
     clickCheckBoxById(browser, "paymentForm:ccdTerms")
-    selectDropDownByIdAndOptionValue(browser, "paymentForm:ccdExpiryDateYYYY", readSheet.cell(rowIndex, 10).value)
-    fillTextFieldById(browser, "paymentForm:ccdCVV", readSheet.cell(rowIndex, 12).value)
-    fillTextFieldById(browser, "paymentForm:ccdEmail", readSheet.cell(rowIndex, 13).value)
-    fillTextFieldById(browser, "paymentForm:ccdPaymentDetails", readSheet.cell(rowIndex, 7).value)
+    selectDropDownByIdAndOptionValue(browser, "paymentForm:ccdExpiryDateYYYY", readSheet.cell(rowIndex, CCD_YEAR).value)
+    fillTextFieldById(browser, "paymentForm:ccdCVV", readSheet.cell(rowIndex, CCD_CVV).value)
+    fillTextFieldById(browser, "paymentForm:ccdEmail", readSheet.cell(rowIndex, CCD_EMAIL).value)
+    fillTextFieldById(browser, "paymentForm:ccdPaymentDetails", readSheet.cell(rowIndex, PAYMENT_REMARKS).value)
     clickButtonById(browser, "paymentForm:payNow")
-    waitForURL(browser, "bne-stripe2.ap.gateway.mastercard.com/acs/MastercardACS")
+    waitForURL(browser, "ap.gateway.mastercard.com/acs/MastercardACS")
     clickButtonByXpath(browser, "//input[@type='submit' and @value='Submit']")
     waitForURL(browser, "merchantUtility/NPayResponse.jsp")
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
-    xmlInstance = xmlObject(responseXML)
-    transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
-    writeSheet.write(rowIndex, 17, transactionRef)
-    writeSheet.write(rowIndex, 18, responseXML)
+    handleResponse(responseXML, rowIndex, writeSheet)
 
 
 '''browser = createBrowser()
