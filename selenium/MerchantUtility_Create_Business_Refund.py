@@ -27,14 +27,19 @@ def merchantUtilityRefundtSubmit(browser):
 def handleBusinessRefundResponse(rowIndex, writeSheet, xmlInstance):
     errorCode = xmlInstance.findAllByXPath('Body/SrvRes/ExceptionDetails/ErrorCode')
     writeSheet.write(rowIndex, REVERSAL_ERROR_CODE, errorCode)
-    transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/TxnReversalRes/Transfer/NoqodiRevRefNo')
-    writeSheet.write(rowIndex, NOQODI_REVERSAL_REF, transactionRef)
+    if errorCode == "EPG-REV-000":
+        transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/TxnReversalRes/Transfer/NoqodiRevRefNo')
+        writeSheet.write(rowIndex, NOQODI_REVERSAL_REF, transactionRef)
 
 def handleBusinessRefundResponse(refund:Refund, xmlInstance):
-    errorCode = xmlInstance.findAllByXPath('Body/SrvRes/ExceptionDetails/ErrorCode')
-    refund.reversalErrorCode = errorCode
-    transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/TxnReversalRes/Transfer/NoqodiRevRefNo')
-    refund.noqodiRevRef = transactionRef
+    try:
+        errorCode = xmlInstance.findAllByXPath('Body/SrvRes/ExceptionDetails/ErrorCode')
+        refund.reversalErrorCode = errorCode
+        if errorCode == "EPG-REV-000":
+            transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/TxnReversalRes/Transfer/NoqodiRevRefNo')
+            refund.noqodiRevRef = transactionRef
+    except:
+        pass
 
 def makeBusinessRefund(browser, rowIndex, readSheet, writeSheet):
     loadURL(browser, HOST+"/TransactionReversalForm.jsp")

@@ -1,6 +1,7 @@
 ##This file will contain all constanta
 
-HOST="http://94.200.29.187:5115/merchantUtility"
+#HOST="http://94.200.29.187:5115/merchantUtility"
+HOST="https://www.testepg.ae/merchantUtility"
 XLS_Name = r"test\data\TNOQ-5176\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
 
 MODULE=0

@@ -72,7 +72,8 @@ def handleResponse(responseXML, payment: Payment):
         payment.paymentResponseXML = responseXML
         errorCode = xmlInstance.findAllByXPath('Body/SrvRes/ExceptionDetails/ErrorCode')
         payment.paymentErrorCode = errorCode
-        transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
-        payment.noqodiRef = transactionRef
+        if errorCode == "EPG-PMT-000":
+            transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
+            payment.noqodiRef = transactionRef
     except:
         pass

@@ -42,6 +42,7 @@ class Refund:
 
     def __init__(self):
         self.merchantCode = ""
+        self.sequence = ""
         self.paymentSequence = ""
         self.noqodiRef = ""
         self.merchantRef = ""
@@ -109,9 +110,11 @@ def saveObjectToExcel(excelPath, sheetName, executable_list_, template_payment_,
                     rowIndex = getattr(executable, "sequence")
                 elif isinstance(executable, Refund):
                     property_index_ = getattr(template_refund_, propertyName)
+                    print(":propertyName:>>"+str(propertyName)+"property_index_:>>"+str(property_index_))
                     rowIndex = getattr(executable, "sequence")
+                    print(":propertyName:>>"+str(propertyName)+"rowIndex:>>"+str(rowIndex))
 
-                print(rowIndex + "<<>>" + propertyName + "<<>>" + str(property_index_) + "<<>>" + str(
+                print(rowIndex+"<<>>" + propertyName + "<<>>" + str(property_index_) + "<<>>" + str(
                     getattr(executable, propertyName)))
                 if "beneficiaryList" not in propertyName:
                     sheet_test.cell(row=int(rowIndex)+1, column=int(str(property_index_))).value = str(

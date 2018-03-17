@@ -36,7 +36,7 @@ def makeECAPayment(browser, payment: Payment):
     payment.merchantRef = merchantTxnId
     merchantUtilityPaymentSubmit(browser)
     paymentZoneWalletLogin_EnterWallet(browser, payment.walletId)
-    paymentZoneWalletLogin_EnterPassword(browser, payment.walletId)
+    paymentZoneWalletLogin_EnterPassword(browser, payment.password)
     paymentZoneWalletLogin_Submit(browser)
     fillTextFieldById(browser, "paymentForm:dw_payment_details", payment.paymentRemark)
     clickButtonById(browser, "paymentForm:payNow")

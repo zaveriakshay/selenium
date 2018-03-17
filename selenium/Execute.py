@@ -10,22 +10,22 @@ def executePayment():
     print("Start executePayment")
     paymentOrRefund = excelToExecutable('test/data/Payments.xlsx','Payments')
     execute(paymentOrRefund,'test/data/Payments.xlsx', 'Payments')
+    return paymentOrRefund
 
 def executeRefunds():
     print("Start executeRefunds")
     paymentOrRefund = excelToExecutable('test/data/Payments.xlsx','Refunds')
     execute(paymentOrRefund,'test/data/Payments.xlsx', 'Refunds')
 
-def refundUpdateFlow():
-    loadPayment = excelToExecutable('test/data/Payments.xlsx','Payments')
-    template_refund_ = loadPayment["templateRefund"]
-    template_payment_ = loadPayment["templatePayment"]
-    executable_list_ = loadPayment["executableList"]
-    paymentOrRefund = excelToExecutable('test/data/Payments.xlsx', 'Refunds')
-    refundDict = createRefundMap(paymentOrRefund)
+def refundUpdateFlow(payments):
+    template_payment_ = payments["templatePayment"]
+    executable_list_ = payments["executableList"]
+    refunds = excelToExecutable('test/data/Payments.xlsx', 'Refunds')
+    template_refund_ = refunds["templateRefund"]
+    refundDict = createRefundMap(refunds)
     for payment in executable_list_ :
         updatePaymentDetailsToAllRefunds(payment,refundDict)
-    saveObjectToExcel('test/data/Payments.xlsx', 'Refunds', paymentOrRefund["executableList"], template_payment_, template_refund_)
+    saveObjectToExcel('test/data/Payments.xlsx', 'Refunds', refunds["executableList"], template_payment_, template_refund_)
 
 def createRefundMap(paymentOrRefund):
     print("Start createRefundMap")
@@ -38,14 +38,19 @@ def createRefundMap(paymentOrRefund):
 
 def updatePaymentDetailsToAllRefunds(payment :Payment,refundDict):
     print("start updatePaymentDetailsToAllRefunds")
-    executables = refundDict[payment.sequence]
-    if isinstance(executables,list):
-        for executable in executables :
-            executable.noqodiRef = payment.noqodiRef
-            executable.merchantRef = payment.merchantRef
-    else:
-        executables.noqodiRef = payment.noqodiRef
-        executables.merchantRef = payment.merchantRef
+    try:
+        executables = refundDict[payment.sequence]
+        if isinstance(executables,list):
+            for executable in executables :
+                executable.noqodiRef = payment.noqodiRef
+                executable.merchantRef = payment.merchantRef
+                executable.merchantCode = payment.merchantCode
+        else:
+            executables.noqodiRef = payment.noqodiRef
+            executables.merchantRef = payment.merchantRef
+            executables.merchantCode = payment.merchantCode
+    except:
+        pass
 
 
 
@@ -74,5 +79,7 @@ def execute(paymentOrRefund,destinationExcelPath,destinationSheetName):
     browser.close();
 
 
-#executePayment();
-refundUpdateFlow()
+payments = executePayment()
+#payments = excelToExecutable('test/data/Payments.xlsx','Payments')
+refundUpdateFlow(payments)
+executeRefunds()
