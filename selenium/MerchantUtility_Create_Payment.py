@@ -6,8 +6,9 @@
 # print (client)
 from AppConstants import *
 from Read_Excel import Payment
+from Read_Excel import Refund
 from Read_XML import xmlObject
-from localselenium.wrapper.UserControl import *
+from UserControl import *
 
 
 def merchantUtilityPaymentEnterAmount(browser, amount):
@@ -22,6 +23,36 @@ def merchantUtilityPaymentSubmit(browser):
     clickButtonByXpath(browser, "//input[@type='submit' and @value='Generate Payment']")
     print("merchant page was submit")
 
+
+def fillBeneDetails(browser, payment: Payment):
+    if payment.isBene == "true":
+        clickCheckBoxById(browser, "beneEnable")
+        count = 1;
+        buttonCount = 0;
+        for key in payment.beneficiaryList:
+            if count % 2 == 0:
+                buttonCount = buttonCount + 1
+                clickButtonById(browser, "btnAddBen" + str(buttonCount))
+            count = count + 1
+        count = 1;
+        for key in payment.beneficiaryList:
+            fillTextFieldById(browser, key, payment.beneficiaryList[key])
+            count = count + 1
+
+def fillBeneDetails(browser, refund: Refund):
+    if refund.isBene == "true":
+        clickCheckBoxById(browser, "beneEnable")
+        count = 1;
+        buttonCount = 0;
+        for key in refund.beneficiaryList:
+            if count % 2 == 0:
+                buttonCount = buttonCount + 1
+                clickButtonById(browser, "btnAddBen" + str(buttonCount))
+            count = count + 1
+        count = 1;
+        for key in refund.beneficiaryList:
+            fillTextFieldById(browser, key, refund.beneficiaryList[key])
+            count = count + 1
 
 def handleResponse(responseXML, rowIndex, writeSheet):
     try:

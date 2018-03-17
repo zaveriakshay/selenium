@@ -36,7 +36,7 @@ class Payment:
         self.sequence = ""
         self.isRefund = ""
         self.isEOD = ""
-
+        self.isBene = ""
 
 class Refund:
 
@@ -59,13 +59,14 @@ class Refund:
         self.reversalErrorCode = ""
 
         self.isEOD = ""
+        self.isBene = ""
 
 
-def excelToPayment():
+def excelToExecutable(excelPath,sheetName):
     payment = Payment()
-    wb = openpyxl.load_workbook('test/data/Payments.xlsx')
+    wb = openpyxl.load_workbook(excelPath)
     print(wb.sheetnames)
-    sheet_test = wb["Payments"]
+    sheet_test = wb[sheetName]
     executableList = []
     executable = {}
     templatePayment = {}
@@ -95,10 +96,10 @@ def excelToPayment():
     return {"templateRefund": templateRefund, "templatePayment": templatePayment, "executableList": executableList}
 
 
-def saveObjectToExccel(executable_list_, template_payment_, template_refund_):
-    wb = openpyxl.load_workbook('test/data/Payments.xlsx')
+def saveObjectToExcel(excelPath, sheetName, executable_list_, template_payment_, template_refund_):
+    wb = openpyxl.load_workbook(excelPath)
     #wb.create_sheet(index=0, title='PaymentsOutput')
-    sheet_test = wb["Payments"]
+    sheet_test = wb[sheetName]
     rowIndex = 0
     for executable in executable_list_:
         for propertyName in dir(executable):
@@ -115,12 +116,12 @@ def saveObjectToExccel(executable_list_, template_payment_, template_refund_):
                 if "beneficiaryList" not in propertyName:
                     sheet_test.cell(row=int(rowIndex)+1, column=int(str(property_index_))).value = str(
                         getattr(executable, propertyName))
-    wb.save('test/data/Payments.xlsx')
+    wb.save(excelPath)
 
 
-paymentOrRefund = excelToPayment()
+'''paymentOrRefund = excelToExecutable()
 print(paymentOrRefund)
 template_refund_ = paymentOrRefund["templateRefund"]
 template_payment_ = paymentOrRefund["templatePayment"]
 executable_list_ = paymentOrRefund["executableList"]
-saveObjectToExccel(executable_list_, template_payment_, template_refund_)
+saveObjectToExccel(executable_list_, template_payment_, template_refund_)'''

@@ -4,7 +4,7 @@
 # url="http://94.200.29.187:5115/paymentZone/PaymentService/Payment?WSDL"
 # client = Client(url)
 # print (client)
-from localselenium.wrapper.UserControl import *
+from UserControl import *
 
 from MerchantUtility_Create_Payment import *
 from Read_XML import xmlObject
