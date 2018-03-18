@@ -5,7 +5,7 @@
 # client = Client(url)
 # print (client)
 import xml.etree.ElementTree as ET
-from localselenium.wrapper.UserControl import *
+from UserControl import *
 
 
 class xmlObject:
@@ -52,3 +52,16 @@ def readXML(xmlString):
     print("readXML:in:" + xmlString)
     xmlInstance = xmlObject(xmlString)
     xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
+
+def createXML():
+    root = ET.Element("root")
+    doc = ET.SubElement(root, "doc")
+    ET.SubElement(doc, "field1").text = "some value1"
+    ET.SubElement(doc, "field2").text = "some vlaue2"
+    tree = ET.ElementTree(root)
+    xmlAsString = ET.tostring(tree)
+    print(xmlAsString)
+    tree.write("test/data/filename.xml")
+
+
+#createXML()

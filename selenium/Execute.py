@@ -4,28 +4,32 @@ from MerchantUtility_Create_Payment_CCD_Unregistered import *
 from MerchantUtility_Create_Payment_DDB import *
 from MerchantUtility_Create_Payment_ECA import *
 from Read_Excel import *
-
+from AppConstants import *
 
 def executePayment():
     print("Start executePayment")
-    paymentOrRefund = excelToExecutable('test/data/Payments.xlsx','Payments')
-    execute(paymentOrRefund,'test/data/Payments.xlsx', 'Payments')
+    paymentOrRefund = excelToExecutable(xlsx, 'Payments')
+    execute(paymentOrRefund, xlsx, 'Payments')
     return paymentOrRefund
+
 
 def executeRefunds():
     print("Start executeRefunds")
-    paymentOrRefund = excelToExecutable('test/data/Payments.xlsx','Refunds')
-    execute(paymentOrRefund,'test/data/Payments.xlsx', 'Refunds')
+    paymentOrRefund = excelToExecutable(xlsx, 'Refunds')
+    execute(paymentOrRefund, xlsx, 'Refunds')
+
 
 def refundUpdateFlow(payments):
     template_payment_ = payments["templatePayment"]
     executable_list_ = payments["executableList"]
-    refunds = excelToExecutable('test/data/Payments.xlsx', 'Refunds')
+    refunds = excelToExecutable(xlsx, 'Refunds')
     template_refund_ = refunds["templateRefund"]
     refundDict = createRefundMap(refunds)
-    for payment in executable_list_ :
-        updatePaymentDetailsToAllRefunds(payment,refundDict)
-    saveObjectToExcel('test/data/Payments.xlsx', 'Refunds', refunds["executableList"], template_payment_, template_refund_)
+    for payment in executable_list_:
+        updatePaymentDetailsToAllRefunds(payment, refundDict)
+    saveObjectToExcel(xlsx, 'Refunds', refunds["executableList"], template_payment_,
+                      template_refund_)
+
 
 def createRefundMap(paymentOrRefund):
     print("Start createRefundMap")
@@ -36,12 +40,13 @@ def createRefundMap(paymentOrRefund):
             dict.setdefault(str(executable.paymentSequence), []).append(executable)
     return dict
 
-def updatePaymentDetailsToAllRefunds(payment :Payment,refundDict):
+
+def updatePaymentDetailsToAllRefunds(payment: Payment, refundDict):
     print("start updatePaymentDetailsToAllRefunds")
     try:
         executables = refundDict[payment.sequence]
-        if isinstance(executables,list):
-            for executable in executables :
+        if isinstance(executables, list):
+            for executable in executables:
                 executable.noqodiRef = payment.noqodiRef
                 executable.merchantRef = payment.merchantRef
                 executable.merchantCode = payment.merchantCode
@@ -53,8 +58,7 @@ def updatePaymentDetailsToAllRefunds(payment :Payment,refundDict):
         pass
 
 
-
-def execute(paymentOrRefund,destinationExcelPath,destinationSheetName):
+def execute(paymentOrRefund, destinationExcelPath, destinationSheetName):
     browser = createBrowser()
     template_refund_ = paymentOrRefund["templateRefund"]
     template_payment_ = paymentOrRefund["templatePayment"]
@@ -80,6 +84,6 @@ def execute(paymentOrRefund,destinationExcelPath,destinationSheetName):
 
 
 payments = executePayment()
-#payments = excelToExecutable('test/data/Payments.xlsx','Payments')
+# payments = excelToExecutable(xlsx,'Payments')
 refundUpdateFlow(payments)
 executeRefunds()

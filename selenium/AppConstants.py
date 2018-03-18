@@ -1,8 +1,9 @@
 ##This file will contain all constanta
 
-#HOST="http://94.200.29.187:5115/merchantUtility"
-HOST="https://www.testepg.ae/merchantUtility"
+HOST="http://94.200.29.187:5115/merchantUtility"
+#HOST="https://www.testepg.ae/merchantUtility"
 XLS_Name = r"test\data\TNOQ-5176\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
+xlsx = 'test/data/TNOQ-5178/Round1/Reversal BO_Single Bene_No Charges_No Adjustment.xlsx'
 
 MODULE=0
 MERCHANT_CODE=MODULE+1

@@ -1,0 +1,26 @@
+Merchant,Tran Date,Rev Date,Rev Type,Merchant Ref,Noqodi Ref Id - Pay,Rev Ref Id - Pay,Merchant Parent Id,Pay Mode,DW ID/ Bank Id,Tran Amount,Refund Request Amount,Refund Charges,Actual Refund Amount,Remarks,Status,noqodi Fun ID,noqodi Fun ID - Rev,
+RDC - Deposit UAT,18/03/2018 13:41:28,18/03/2018 13:43:08,Business,8127780,6685328,6685334,8127780,Credit Card,,10315,1000,0,1000,Refund for reference number 6685328,Pending,6685327,,
+RDC - Deposit UAT,18/03/2018 13:41:28,18/03/2018 13:42:57,Business,8127780,6685328,6685333,8127780,Credit Card,,10315,1000,0,1000,Refund for reference number 6685328,Pending,6685327,,
+RDC - Deposit UAT,18/03/2018 13:41:28,18/03/2018 13:42:47,Business,8127780,6685328,6685332,8127780,Credit Card,,10315,2000,0,2000,Refund for reference number 6685328,Pending,6685327,,
+RDC - Deposit UAT,18/03/2018 13:41:28,18/03/2018 13:42:37,Business,8127780,6685328,6685331,8127780,Credit Card,,10315,1000,0,1000,Refund for reference number 6685328,Pending,6685327,,
+RDC - Deposit UAT,18/03/2018 12:41:12,18/03/2018 12:42:10,Business,8127778,6685314,6685319,8127778,ECash,DW112134,15052.5,20,0,20,Refund for reference number 6685314,Pending,,,
+RDC - Deposit UAT,18/03/2018 12:41:02,18/03/2018 12:42:01,Business,8127777,6685313,6685318,8127777,ECash,,15052.5,20,0,20,Refund for reference number 6685313,Pending,,,
+RDC - Deposit UAT,18/03/2018 12:40:52,18/03/2018 12:41:51,Business,8127776,6685312,6685316,8127776,Credit Card,DW999999,10315,20,0,20,Refund for reference number 6685312,Pending,6685311,6685317,
+RDC - Deposit UAT,18/03/2018 12:40:17,18/03/2018 12:41:40,Business,8127775,6685310,6685315,8127775,ECash,DW112134,15052.5,100,0,100,Refund for reference number 6685310,Pending,,,
+RDC - Deposit UAT,18/03/2018 12:35:19,18/03/2018 12:36:07,Business,8127774,6685304,6685309,8127774,ECash,DW112134,15052.5,20,0,20,Refund for reference number 6685304,Pending,,,
+RDC - Deposit UAT,18/03/2018 12:35:08,18/03/2018 12:35:58,Business,8127773,6685303,6685308,8127773,ECash,,15052.5,20,0,20,Refund for reference number 6685303,Pending,,,
+RDC - Deposit UAT,18/03/2018 12:34:58,18/03/2018 12:35:48,Business,8127772,6685302,6685306,8127772,Credit Card,DW999999,10315,20,0,20,Refund for reference number 6685302,Pending,6685301,6685307,
+RDC - Deposit UAT,18/03/2018 12:34:23,18/03/2018 12:35:36,Business,8127771,6685300,6685305,8127771,ECash,DW112134,15052.5,100,0,100,Refund for reference number 6685300,Pending,,,
+RDC - Deposit UAT,18/03/2018 12:19:14,18/03/2018 12:20:02,Business,8127767,6685291,6685295,8127767,ECash,,15052.5,20,0,20,Refund for reference number 6685291,Pending,,,
+RDC - Deposit UAT,18/03/2018 12:19:05,18/03/2018 12:19:51,Business,8127766,6685290,6685293,8127766,Credit Card,DW999999,10315,20,0,20,Refund for reference number 6685290,Pending,6685289,6685294,
+RDC - Deposit UAT,18/03/2018 12:01:13,18/03/2018 12:02:01,Business,8127760,6685280,6685284,8127760,ECash,,15052.5,20,0,20,Refund for reference number 6685280,Pending,,,
+RDC - Deposit UAT,18/03/2018 12:01:03,18/03/2018 12:01:53,Business,8127759,6685279,6685282,8127759,Credit Card,DW999999,10315,20,0,20,Refund for reference number 6685279,Pending,6685278,6685283,
+,,,,,,,,,,Total,5400.0,0.0,5400.0
+
+
+	
+
+
+
+
+

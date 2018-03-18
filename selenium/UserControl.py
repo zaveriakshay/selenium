@@ -6,6 +6,7 @@ def pauseForSeconds(seconds):
     time.sleep(seconds)
 
 def fillTextFieldById(browser, id, value):
+    pauseForSeconds(0.5)
     print("fillTextFieldById:in:" + id + ":" + value)
     global elem
     elem = browser.find_element_by_id(id)
