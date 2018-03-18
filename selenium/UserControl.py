@@ -2,9 +2,15 @@ from selenium import webdriver
 import time
 from selenium.webdriver.support.ui import Select
 
+from AppConstants import gifGlobalCreator
+from Image import GifCreatorDecorator
+
+
 def pauseForSeconds(seconds):
     time.sleep(seconds)
 
+
+@GifCreatorDecorator(gifGlobalCreator)
 def fillTextFieldById(browser, id, value):
     pauseForSeconds(0.5)
     print("fillTextFieldById:in:" + id + ":" + value)
@@ -15,6 +21,7 @@ def fillTextFieldById(browser, id, value):
     print("fillTextFieldById:out")
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def selectDropDownByIdAndOptionValue(browser, id, value):
     print("selectDropDownByIdAndOptionValue:in:" + id + ":" + value)
     global select
@@ -23,6 +30,7 @@ def selectDropDownByIdAndOptionValue(browser, id, value):
     print("selectDropDownByIdAndOptionValue:out")
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def clickCheckBoxById(browser, id):
     print("selectCheckBoxById:in:" + id)
     pauseForSeconds(2)
@@ -30,24 +38,28 @@ def clickCheckBoxById(browser, id):
     print("selectCheckBoxById:out:")
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def clickRadioButtonById(browser, id):
     print("clickRadioButtonById:in:" + id)
     browser.find_element_by_id(id).click()
     print("clickRadioButtonById:out:")
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def clickButtonById(browser, id):
     print("clickButtonById:in:" + id)
     browser.find_element_by_id(id).click()
     print("clickButtonById:out:")
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def clickButtonByXpath(browser, xPath):
     print("clickButtonByXpath:in:" + xPath)
     browser.find_element_by_xpath(xPath).click()
     print("clickButtonByXpath:out:")
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def waitForURL(browser, waitOnThisURL):
     print("waitForURL:in:" + waitOnThisURL)
     while True:
@@ -60,15 +72,16 @@ def waitForURL(browser, waitOnThisURL):
 
 
 def createBrowser():
-    browser = webdriver.Chrome(
-        r"resources\selenium\webdriver\chrome\x86\chromedriver.exe")
+    browser = webdriver.Chrome(r"resources\selenium\webdriver\chrome\x86\chromedriver.exe")
     return browser
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def loadURL(browser, url):
     browser.get(url)
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def clickHrefId(browser, id):
     print("clickHrefId:in:" + id)
     pauseForSeconds(2)
@@ -76,6 +89,7 @@ def clickHrefId(browser, id):
     print("clickHrefId:out:")
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def findInputValueById(browser, id):
     print("findInputValueByXPath:in:" + ":" + id)
     inputElement = browser.find_element_by_id(id)
@@ -84,6 +98,7 @@ def findInputValueById(browser, id):
     return value
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def findInputValueByXPath(browser, xPath):
     print("findInputValueByXPath:in:" + ":" + xPath)
     inputElement = browser.find_element_by_xpath(xPath)
@@ -92,6 +107,7 @@ def findInputValueByXPath(browser, xPath):
     return value
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def findInputValueByCssSelector(browser, cssSelector):
     print("findInputValueByCssSelector:in:" + ":" + cssSelector)
     inputElement = browser.find_element_by_css_selector(cssSelector)
@@ -100,6 +116,7 @@ def findInputValueByCssSelector(browser, cssSelector):
     return value
 
 
+@GifCreatorDecorator(gifGlobalCreator)
 def findInputValueByClassName(browser, className):
     print("findInputValueByClassName:in:" + ":" + className)
     inputElement = browser.find_element_by_class_name(className)
