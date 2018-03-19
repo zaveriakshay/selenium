@@ -1,1 +1,23 @@
-><root><doc><field1 name="blah">some value1</field1><field2 name="asdfasd">some vlaue2</field2></doc></root>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EPGMerchantServices>
+    <Header>
+        <Version>1.0</Version>
+        <SrvType>RELEASEFUNDPULL</SrvType>
+        <SrvName>Release Fund Pull</SrvName>
+        <SrcApp></SrcApp>
+        <TargetApp>emarapay</TargetApp>
+        <Timestamp>14/01/2017 23:23:43</Timestamp>
+        <SrcMsgId>6560193</SrcMsgId>
+        <OrgId></OrgId>
+        <InstanceId>xxx</InstanceId>
+    </Header>
+    <Body>
+        <SrvReq>
+            <ReleaseFundStatusReq>
+                <MerchantID>MR100010</MerchantID>
+                <ReleaseType>BUSINESSREFUND</ReleaseType>
+                <NoqodiReference>6581674</NoqodiReference>
+            </ReleaseFundStatusReq>
+        </SrvReq>
+    </Body>
+</EPGMerchantServices>
