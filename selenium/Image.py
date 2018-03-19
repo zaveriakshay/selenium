@@ -62,7 +62,7 @@ class GifCreatorDecorator(object):
                 self.gifCreator.appendToGif()
                 self.gifCreator.saveGIFToDisk()
 
-            f(*args)
+            return f(*args)
             print("After f(*args)")
 
         return wrapped_f

@@ -3,8 +3,9 @@ from Image import GifCreator
 
 HOST = "http://94.200.29.187:5115/merchantUtility"
 # HOST="https://www.testepg.ae/merchantUtility"
-XLS_Name = r"test\data\TNOQ-5176\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
-xlsx = 'test/data/TNOQ-5178/Round1/Reversal BO_Single Bene_No Charges_No Adjustment.xlsx'
+XLS_Name = r"test\data\TNOQ-5177\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
+testCaseFolder = "test/data/TNOQ-5177/Round1/"
+xlsx = testCaseFolder+'Reversal_API_Single_Bene_With_Charges_No_Adjustment_Multi_Refund.xlsx'
 
 MODULE = 0
 MERCHANT_CODE = MODULE + 1
@@ -36,7 +37,7 @@ NOQODI_REVERSAL_REF = REFUND_IBAN + 1
 REVERSAL_RESPONSE_XML = NOQODI_REVERSAL_REF + 1
 REVERSAL_ERROR_CODE = REVERSAL_RESPONSE_XML + 1
 
-nowPng = r"test/data/TNOQ-5178/Round2/Images/now.png"
-gifGlobalCreator = GifCreator(1, "test/data/TNOQ-5178/Round2/Images/now.gif",nowPng)
+nowPng = testCaseFolder+r"Images/now.png"
+gifGlobalCreator = GifCreator(1, testCaseFolder+"Images/now.gif",nowPng)
 
 print(REVERSAL_RESPONSE_XML)
