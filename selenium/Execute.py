@@ -5,6 +5,8 @@ from MerchantUtility_Create_Payment_DDB import *
 from MerchantUtility_Create_Payment_ECA import *
 from Read_Excel import *
 from AppConstants import *
+from SOAP_Create_Payment_Xpress import *
+
 
 def executePayment():
     print("Start executePayment")
@@ -73,6 +75,8 @@ def execute(paymentOrRefund, destinationExcelPath, destinationSheetName):
                 makeUnregisteredCCDPayment(browser, executable)
             elif executable.paymentMode == "DDB":
                 makeDDBPayment(browser, executable)
+            elif executable.paymentMode == "XPR":
+                makeExpressPayment(browser,executable)
             elif executable.paymentMode == "EXIT":
                 break
             elif executable.paymentMode == "NA":

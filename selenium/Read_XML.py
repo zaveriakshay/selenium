@@ -9,49 +9,63 @@ from UserControl import *
 
 
 class xmlObject:
-    def __init__(self,xmlString):
+    def __init__(self, xmlString):
         print("__init__:in:" + xmlString)
         self.xmlString = xmlString;
         self.elementTree = ET.fromstring(self.xmlString)
 
     def getXmlString(self):
-        print("getXmlString:in:" )
+        print("getXmlString:in:")
         return self.xmlString;
 
     def getElementTree(self):
-        print("getElementTree:in:" )
+        print("getElementTree:in:")
         return self.elementTree;
 
     def printAllTags(self):
-        print("printAllTags:in:" )
+        print("printAllTags:in:")
         for child in self.elementTree:
             print(child.tag)
 
-    def findByXpath(self,xPath):
-        print("findByXpath:in:" +xPath)
-        print("findByXpath:self.elementTree:" +self.elementTree.tag)
+    def findByXpath(self, xPath):
+        print("findByXpath:in:" + xPath)
+        print("findByXpath:self.elementTree:" + self.elementTree.tag)
         self.elementTree.find(xPath)
 
-    def iterateSearch(self,tagName):
-        print("iterateSearch:in:" +tagName)
-        print("iterateSearch:self.elementTree:" +self.elementTree.tag)
+    def iterateSearch(self, tagName):
+        print("iterateSearch:in:" + tagName)
+        print("iterateSearch:self.elementTree:" + self.elementTree.tag)
         tag = self.elementTree.iter(tagName)
         print(tag)
 
-    def findAllByXPath(self,xPath):
-        print("findAllByXPath:in:" +xPath)
+    def findAllByXPath(self, xPath):
+        print("findAllByXPath:in:" + xPath)
         tag = self.elementTree.findall(xPath)
-        print("findAllByXPath:tag:" +str(tag))
+        print("findAllByXPath:tag:" + str(tag))
         for i in tag:
             text = i.text
             break
-        print("findAllByXPath:out:" +text)
+        print("findAllByXPath:out:" + text)
         return text
+
+    def pushObjectToTemplate(self,executable):
+        print("pushObjectToTemplate:in:")
+        for elem in self.elementTree.iter():
+            print(elem.text)
+            try:
+                elem.text = getattr(executable,elem.text)
+            except:
+                pass
+            print(elem.text)
+        tostring = ET.tostring(self.elementTree).decode()
+        print("pushObjectToTemplate:out:"+tostring)
+        return tostring
 
 def readXML(xmlString):
     print("readXML:in:" + xmlString)
     xmlInstance = xmlObject(xmlString)
     xmlInstance.findAllByXPath('Body/SrvRes/NormalPayRes/Transfer/TransactionRefNo')
+
 
 def createXML():
     root = ET.Element("root")
@@ -64,4 +78,10 @@ def createXML():
     tree.write("test/data/filename.xml")
 
 
-#createXML()
+def updateXML():
+    xmlString = open("test/data/filename.xml", "r")
+    xmlInstance = xmlObject(xmlString.read())
+    xmlInstance.pushObjectToTemplate()
+
+
+#updateXML()

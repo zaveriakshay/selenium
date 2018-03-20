@@ -4,8 +4,8 @@ from Image import GifCreator
 HOST = "http://94.200.29.187:5115/merchantUtility"
 # HOST="https://www.testepg.ae/merchantUtility"
 XLS_Name = r"test\data\TNOQ-5177\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
-testCaseFolder = "test/data/TNOQ-5177/Round1/"
-xlsx = testCaseFolder+'Reversal_API_Single_Bene_With_Charges_No_Adjustment_Multi_Refund.xlsx'
+testCaseFolder = "test/data/"
+xlsx = testCaseFolder+'XPR_Payments_Sample.xlsx'
 
 MODULE = 0
 MERCHANT_CODE = MODULE + 1

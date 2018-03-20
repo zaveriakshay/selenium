@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EPGMerchantServices>
+	<Header>
+		<Version>1.0</Version>
+		<SrvType>PMTNP</SrvType>
+		<SrvName>Xpress</SrvName>
+		<SrcApp>merchantCode</SrcApp>
+		<TargetApp>emarapay</TargetApp>
+		<Timestamp>09/12/2014 12:20:08</Timestamp>
+		<SrcMsgId>merchantRef</SrcMsgId>
+		<TrackingId>merchantRef</TrackingId>
+		<OrgId>merchantCode</OrgId>
+		<InstanceId>xxx</InstanceId>
+	</Header>
+	<Body>
+		<SrvReq>
+			<XPressPayReq>
+				<TransactionID>merchantRef</TransactionID>
+				<MerchantID>merchantCode</MerchantID>
+				<MerchantDesc>merchantCode</MerchantDesc>
+				<PaymentMode>Xpress</PaymentMode>
+				<UserID>password</UserID>
+				<WalletID>walletId</WalletID>
+				<AbsoluteCharges>
+					<Amount>paymentAmount</Amount>
+					<Currency>AED</Currency>
+				</AbsoluteCharges>
+				<BatchCount>1</BatchCount>
+				<OrderID>merchantRef</OrderID>
+				<OrderDesc>paymentRemark</OrderDesc>
+				<Rollback>false</Rollback>
+				</XPressPayReq>
+		</SrvReq>
+	</Body>
+</EPGMerchantServices>
