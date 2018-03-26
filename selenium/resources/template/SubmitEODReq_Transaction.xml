@@ -1,0 +1,12 @@
+<Transaction>
+    <PaymentMode>PaymentMode</PaymentMode>
+    <FITransactionID>FITransactionID</FITransactionID>
+    <EPGTransactionID>noqodiRef</EPGTransactionID>
+    <PaymentDate>PaymentDate</PaymentDate>
+    <PaymentRealizationDate>PaymentDate</PaymentRealizationDate>
+    <PayAmount>Amount</PayAmount>
+    <PayCurrency>Currency</PayCurrency>
+    <Status>S</Status>
+    <ErrorCode>000</ErrorCode>
+    <ErrorDescription>Success</ErrorDescription>
+</Transaction>

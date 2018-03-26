@@ -31,7 +31,7 @@ def makeECAPayment(browser, payment: Payment):
     loadURL(browser, HOST + "/PaymentForm.jsp")
     merchantUtilitySelectMerchant(browser, payment.merchantCode)
     merchantUtilityPaymentEnterAmount(browser, payment.paymentAmount)
-    fillBeneDetails(browser,payment)
+    fillBeneDetails(browser, payment)
     merchantTxnId = findInputValueById(browser, "txnID")
     payment.merchantRef = merchantTxnId
     merchantUtilityPaymentSubmit(browser)
@@ -43,5 +43,3 @@ def makeECAPayment(browser, payment: Payment):
     waitForURL(browser, "merchantUtility/NPayResponse.jsp")
     responseXML = findInputValueByClassName(browser, "input-xxlarge")
     handleResponse(responseXML, payment)
-
-

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EPGFIServices>
+	<Header>
+		<Version>1.0</Version>
+		<SrvType>PMTNP</SrvType>
+		<SrvName>Account Top Up</SrvName>
+		<SrcApp>FICode</SrcApp>
+		<TargetApp>noqodi</TargetApp>
+		<Timestamp>25/01/2013 14:22:33</Timestamp>
+		<SrcMsgId>FITransactionID</SrcMsgId>
+		<TrackingId>FITransactionID</TrackingId>
+		<OrgId>FICode</OrgId>
+	</Header>
+	<Body>
+		<SrvReq>
+			<PaymentMessageReq>
+				<FICode>FICode</FICode>
+			    <FITransactionID>FITransactionID</FITransactionID>
+				<PaymentMode>PaymentMode</PaymentMode>
+				<Payment>
+					<PayRequestNo>PayRequestNo</PayRequestNo>
+					<Amount>Amount</Amount>
+					<Currency>Currency</Currency>
+				</Payment>
+			</PaymentMessageReq>
+		</SrvReq>
+	</Body>
+</EPGFIServices>

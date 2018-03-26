@@ -1,23 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<EPGMerchantServices>
-    <Header>
-        <Version>1.0</Version>
-        <SrvType>RELEASEFUNDPULL</SrvType>
-        <SrvName>Release Fund Pull</SrvName>
-        <SrcApp></SrcApp>
-        <TargetApp>emarapay</TargetApp>
-        <Timestamp>14/01/2017 23:23:43</Timestamp>
-        <SrcMsgId>6560193</SrcMsgId>
-        <OrgId></OrgId>
-        <InstanceId>xxx</InstanceId>
-    </Header>
-    <Body>
-        <SrvReq>
-            <ReleaseFundStatusReq>
-                <MerchantID>MR100010</MerchantID>
-                <ReleaseType>BUSINESSREFUND</ReleaseType>
-                <NoqodiReference>6581674</NoqodiReference>
-            </ReleaseFundStatusReq>
-        </SrvReq>
-    </Body>
-</EPGMerchantServices>
+<Transaction>
+    <PaymentMode>ECA</PaymentMode>
+    <FITransactionID>ADCB260320180114901</FITransactionID>
+    <EPGTransactionID>06585011</EPGTransactionID>
+    <PaymentDate>26/03/2018</PaymentDate>
+    <PaymentRealizationDate>26/03/2018</PaymentRealizationDate>
+    <PayAmount>250.25</PayAmount>
+    <PayCurrency>AED</PayCurrency>
+    <Status>S</Status>
+    <ErrorCode>000</ErrorCode>
+    <ErrorDescription>Success</ErrorDescription>
+</Transaction>

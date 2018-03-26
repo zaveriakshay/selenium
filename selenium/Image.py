@@ -58,9 +58,9 @@ class GifCreatorDecorator(object):
             # print("Decorator arguments:", self.arg1)
             if isinstance(args[0], selenium.webdriver.chrome.webdriver.WebDriver):
                 print("arg[0] is instance of web driver, now we can take screen shot call gif creator")
-                self.gifCreator.takeScreenShot(args[0])
-                self.gifCreator.appendToGif()
-                self.gifCreator.saveGIFToDisk()
+                #self.gifCreator.takeScreenShot(args[0])
+                #self.gifCreator.appendToGif()
+                #self.gifCreator.saveGIFToDisk()
 
             return f(*args)
             print("After f(*args)")

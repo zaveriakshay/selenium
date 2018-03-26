@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EPGFIServices>
+	<Header>
+		<Version>1.0</Version>
+		<SrvType>EODSRV</SrvType>
+		<SrvName>EOD Service</SrvName>
+		<SrcApp>CBD</SrcApp>
+		<TargetApp>emarapay</TargetApp>
+		<Timestamp>25/03/2018 10:15:55</Timestamp>
+		<SrcMsgId>250120131422330001</SrcMsgId>
+		<TrackingId>250120131422330001</TrackingId>
+		<OrgId>CBD</OrgId>
+		<InstanceId>xxx</InstanceId>
+	</Header>
+	<Body>
+		<SrvReq>
+			<SubmitEODReq>
+				<FICode>CBD</FICode>
+				<TotalTransactions>1</TotalTransactions>
+				<TotalAmount>250</TotalAmount>
+				<Transaction>
+					<PaymentMode>ECA</PaymentMode>
+					<FITransactionID>CBD2501201401</FITransactionID>
+					<EPGTransactionID>06685931</EPGTransactionID>
+					<PaymentDate>25/03/2018</PaymentDate>
+					<PaymentRealizationDate>25/03/2018</PaymentRealizationDate>
+					<PayAmount>250</PayAmount>
+					<PayCurrency>AED</PayCurrency>
+					<Status>S</Status>
+					<ErrorCode>000</ErrorCode>
+					<ErrorDescription>Success</ErrorDescription>
+				</Transaction>
+			</SubmitEODReq>
+		</SrvReq>
+	</Body>
+</EPGFIServices>

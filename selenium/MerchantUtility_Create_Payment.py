@@ -34,6 +34,7 @@ def fillBeneDetails(browser, payment: Payment):
                 buttonCount = buttonCount + 1
                 clickButtonById(browser, "btnAddBen" + str(buttonCount))
             count = count + 1
+        clickButtonById(browser, "btnDelBen" + str(buttonCount+1))
         count = 1;
         for key in payment.beneficiaryList:
             fillTextFieldById(browser, key, payment.beneficiaryList[key])
@@ -49,6 +50,7 @@ def fillBeneDetails(browser, refund: Refund):
                 buttonCount = buttonCount + 1
                 clickButtonById(browser, "btnAddBen" + str(buttonCount))
             count = count + 1
+        clickButtonById(browser, "btnDelBen" + str(buttonCount + 1))
         count = 1;
         for key in refund.beneficiaryList:
             fillTextFieldById(browser, key, refund.beneficiaryList[key])

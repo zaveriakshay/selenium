@@ -62,6 +62,23 @@ class Refund:
         self.isEOD = ""
         self.isBene = ""
 
+class FIPaymentMessage:
+
+    def __init__(self):
+        self.sequence = ""
+        self.FICode = ""
+        self.FITransactionID = ""
+        self.PaymentMode = ""
+        self.PayRequestNo = ""
+        self.Amount = ""
+        self.Currency = ""
+        self.ResponseXML = ""
+        self.ResponseCode = ""
+        self.noqodiRef = ""
+        self.isEOD = ""
+        self.PaymentDate = ""
+        self.TransactionXML  = ""
+
 
 def excelToExecutable(excelPath,sheetName):
     payment = Payment()
@@ -79,6 +96,9 @@ def excelToExecutable(excelPath,sheetName):
         elif sheet_test.cell(row=rowIndex, column=1).value == "REFUND":
             executable = Refund()
             templateRefund = Refund()
+        elif sheet_test.cell(row=rowIndex, column=1).value == "FIPAYMENTMESSAGE":
+            executable = FIPaymentMessage()
+            templateFIPaymentMessage = FIPaymentMessage()
 
         executableList.append(executable)
         for columnIndex in range(sheet_test.min_column + 1, sheet_test.max_column + 1):
@@ -88,16 +108,19 @@ def excelToExecutable(excelPath,sheetName):
                 setattr(templatePayment, attr_column_mapping, columnIndex)
             elif isinstance(executable, Refund):
                 setattr(templateRefund, attr_column_mapping, columnIndex)
+            elif isinstance(executable, FIPaymentMessage):
+                setattr(templateFIPaymentMessage, attr_column_mapping, columnIndex)
+
             print(attr_column_mapping + ":" + attr_column_value)
             if "bene" in attr_column_mapping:
                 print(attr_column_mapping)
                 executable.beneficiaryList[attr_column_mapping] = attr_column_value
             setattr(executable, attr_column_mapping, attr_column_value)
 
-    return {"templateRefund": templateRefund, "templatePayment": templatePayment, "executableList": executableList}
+    return {"templateRefund": templateRefund, "templatePayment": templatePayment,"templateFIPaymentMessage": templateFIPaymentMessage, "executableList": executableList}
 
 
-def saveObjectToExcel(excelPath, sheetName, executable_list_, template_payment_, template_refund_):
+def saveObjectToExcel(excelPath, sheetName, executable_list_, template_payment_, template_refund_,templateFIPaymentMessage):
     wb = openpyxl.load_workbook(excelPath)
     #wb.create_sheet(index=0, title='PaymentsOutput')
     sheet_test = wb[sheetName]
@@ -110,6 +133,11 @@ def saveObjectToExcel(excelPath, sheetName, executable_list_, template_payment_,
                     rowIndex = getattr(executable, "sequence")
                 elif isinstance(executable, Refund):
                     property_index_ = getattr(template_refund_, propertyName)
+                    print(":propertyName:>>"+str(propertyName)+"property_index_:>>"+str(property_index_))
+                    rowIndex = getattr(executable, "sequence")
+                    print(":propertyName:>>"+str(propertyName)+"rowIndex:>>"+str(rowIndex))
+                elif isinstance(executable, FIPaymentMessage):
+                    property_index_ = getattr(templateFIPaymentMessage, propertyName)
                     print(":propertyName:>>"+str(propertyName)+"property_index_:>>"+str(property_index_))
                     rowIndex = getattr(executable, "sequence")
                     print(":propertyName:>>"+str(propertyName)+"rowIndex:>>"+str(rowIndex))

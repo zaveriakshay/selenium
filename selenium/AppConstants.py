@@ -1,11 +1,14 @@
 ##This file will contain all constanta
+from EncryptionDecyptionUtil import EncryptionDecyptionUtil
 from Image import GifCreator
 
 HOST = "http://94.200.29.187:5115/merchantUtility"
+PAYMENT_WSDL = "https://www.testepg.ae/paymentZone/PaymentService/Payment/PaymentService.wsdl"
+FI_WSDL = "https://www.testepg.ae/paymentZone/EPGFIService/EPGFI/EPGFIService.wsdl"
 # HOST="https://www.testepg.ae/merchantUtility"
-XLS_Name = r"test\data\TNOQ-5177\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
+XLS_Name = r"test\data\TNOQ-5173\Round1\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
 testCaseFolder = "test/data/"
-xlsx = testCaseFolder+'XPR_Payments_Sample.xlsx'
+xlsx = testCaseFolder+'Payments_Sample.xlsx'
 
 MODULE = 0
 MERCHANT_CODE = MODULE + 1
@@ -39,5 +42,6 @@ REVERSAL_ERROR_CODE = REVERSAL_RESPONSE_XML + 1
 
 nowPng = testCaseFolder+r"Images/now.png"
 gifGlobalCreator = GifCreator(1, testCaseFolder+"Images/now.gif",nowPng)
+encryption_decyption_util = EncryptionDecyptionUtil()
 
 print(REVERSAL_RESPONSE_XML)
