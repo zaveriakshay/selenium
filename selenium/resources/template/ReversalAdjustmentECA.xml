@@ -1,0 +1,42 @@
+<EPGMerchantServices>
+    <Header>
+        <Version>1.0</Version>
+        <SrvType>REVERSETXN</SrvType>
+        <SrvName>Xpress</SrvName>
+        <SrcApp>Reverse</SrcApp>
+        <TargetApp>emarapay</TargetApp>
+        <Timestamp>Mon May 16 11:35:41 GST 2016</Timestamp>
+        <SrcMsgId>noqodiRef</SrcMsgId>
+        <OrgId>Reverse</OrgId>
+        <InstanceId>xxx</InstanceId>
+    </Header>
+    <Body>
+        <SrvReq>
+            <TxnReversalReq>
+                <MerchantID>merchantCode</MerchantID>
+                <MerchantDesc>Reverse</MerchantDesc>
+                <EPGTransactionID>noqodiRef</EPGTransactionID>
+                <TransactionID>merchantRef</TransactionID>
+                <RefundSourceType>refundSourceType</RefundSourceType>
+                <WalletId>refundWalletId</WalletId>
+                <BankDetails/>
+                <AbsoluteCharges>
+                    <Amount>refundAmount</Amount>
+                    <Currency>AED</Currency>
+                    <BeneficiaryDetail>
+                        <Code>beneCode1</Code>
+                        <Amount>beneAmount1</Amount>
+                        <Currency>AED</Currency>
+                    </BeneficiaryDetail>
+                    <BeneficiaryDetail>
+                        <Code>beneCode2</Code>
+                        <Amount>beneAmount2</Amount>
+                        <Currency>AED</Currency>
+                    </BeneficiaryDetail>
+                </AbsoluteCharges>
+                <Remarks>refundRemark</Remarks>
+                <Filler3>Filler3</Filler3>
+            </TxnReversalReq>
+        </SrvReq>
+    </Body>
+</EPGMerchantServices>

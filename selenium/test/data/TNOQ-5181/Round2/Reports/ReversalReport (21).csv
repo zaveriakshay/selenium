@@ -1,0 +1,19 @@
+Merchant,Tran Date,Rev Date,Rev Type,Merchant Ref,Noqodi Ref Id - Pay,Rev Ref Id - Pay,Merchant Parent Id,Pay Mode,DW ID/ Bank Id,Tran Amount,Refund Request Amount,Refund Charges,Actual Refund Amount,Remarks,Status,noqodi Fun ID,noqodi Fun ID - Rev,
+RDC - Deposit UAT,28/03/2018 09:41:51,28/03/2018 09:51:10,Business,8127948,6686180,6686187,8127948,Credit Card,DW999999,10315,9000.79,19.8,8980,CCD reversal,Pending,6686179,6686188,
+RDC - Deposit UAT,27/03/2018 17:17:25,27/03/2018 17:18:22,Business,8127933,6686155,6686156,8127933,Credit Card,DW999999,10315,4000,20,3979,Refund for reference number 6686155,Pending,6686154,6686157,
+RDC - Deposit UAT,27/03/2018 16:23:43,27/03/2018 16:25:21,Business,8127932,6686144,6686145,8127932,Credit Card,DW999999,10315,4000,20,3979,Refund for reference number 6686144,Pending,6686143,6686146,
+RDC - Deposit UAT,26/03/2018 13:35:20,26/03/2018 13:42:48,Business,8127926,6686032,6686038,8127926,ECash,DW112149,15052.5,10000,19.8,9979.21,testing with charges,Pending,,,
+RDC - Deposit UAT,26/03/2018 11:55:45,26/03/2018 11:57:44,Business,8127925,6686017,6686018,8127925,ECash,DW112149,103.15,100,19.8,79.21,,Pending,,,
+RDC - Deposit UAT,21/03/2018 14:20:35,21/03/2018 14:45:05,Business,8127889,6685697,6685712,8127889,ECash,DW112134,15052.5,3000,19.8,2979.21,Refund for reference number 6685697,Pending,,,
+RDC - Deposit UAT,21/03/2018 13:41:57,21/03/2018 13:56:08,Business,8127887,6685692,6685694,8127887,ECash,DW112149,15052.5,5501.79,19.8,5481,multi bene with charges,Pending,,,
+RDC - Deposit UAT,21/03/2018 13:02:34,21/03/2018 13:17:14,Business,8127885,6685684,6685687,8127885,ECash,DW112149,15052.5,4500,0,4500,no charges testing,Pending,,,
+RDC - Deposit UAT,21/03/2018 13:03:16,21/03/2018 13:12:28,Business,8127886,6685685,6685688,8127886,ECash,DW112149,10052.5,1000,0,1000,Single bene selected no charges,Pending,,,
+,,,,,,,,,,Total,41102.58,139.0,40956.63
+
+
+	
+
+
+
+
+

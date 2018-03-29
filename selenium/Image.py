@@ -1,6 +1,7 @@
 import datetime
 
 import imageio
+import os
 import selenium
 from selenium import webdriver
 
@@ -23,6 +24,10 @@ class GifCreator:
         self.imageCollection = []
         self.duration = duration
         self.outputFileName = outputFileName
+        try:
+            os.remove(outputFileName)
+        except:
+            pass
         self.nowPng = inputFileName
 
     def appendToGif(self):
@@ -58,9 +63,9 @@ class GifCreatorDecorator(object):
             # print("Decorator arguments:", self.arg1)
             if isinstance(args[0], selenium.webdriver.chrome.webdriver.WebDriver):
                 print("arg[0] is instance of web driver, now we can take screen shot call gif creator")
-                #self.gifCreator.takeScreenShot(args[0])
-                #self.gifCreator.appendToGif()
-                #self.gifCreator.saveGIFToDisk()
+                """self.gifCreator.takeScreenShot(args[0])
+                self.gifCreator.appendToGif()
+                self.gifCreator.saveGIFToDisk()"""
 
             return f(*args)
             print("After f(*args)")

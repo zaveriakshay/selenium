@@ -53,7 +53,11 @@ class xmlObject:
         for elem in self.elementTree.iter():
             print(elem.text)
             try:
-                elem.text = getattr(executable,elem.text)
+                attr = getattr(executable, elem.text)
+                if attr == "None" or attr == "":
+                    elem.text = ""
+                else:
+                    elem.text = attr
             except:
                 pass
             print(elem.text)

@@ -1,0 +1,16 @@
+Merchant,Tran Date,Rev Date,Rev Type,Merchant Ref,Noqodi Ref Id - Pay,Rev Ref Id - Pay,Merchant Parent Id,Pay Mode,DW ID/ Bank Id,Tran Amount,Refund Request Amount,Refund Charges,Actual Refund Amount,Remarks,Status,noqodi Fun ID,noqodi Fun ID - Rev,
+UC-Individual,28/03/2018 12:47:29,28/03/2018 12:51:07,Business,8127962,6686258,6686262,8127962,Credit Card,,10315,2500,0,2500,Refund for reference number 6686258,Pending,6686257,,
+UC-Individual,28/03/2018 12:43:49,28/03/2018 12:50:38,Business,8127961,6686255,6686260,8127961,Credit Card,DW999999,10315,2500,0,2500,Refund for reference number 6686255,Pending,6686254,6686261,
+UC-Individual,28/03/2018 12:41:30,28/03/2018 12:48:59,Business,8127960,6686251,6686259,8127960,ECash,DW112134,15003.15,3000,0,3000,Refund for reference number 6686251,Pending,,,
+UC-Individual,28/03/2018 12:18:14,28/03/2018 12:21:07,Business,8127957,6686229,6686233,8127957,ECash,DW112149,15003.15,3000,0,3000,None,Pending,,,
+UC-Individual,28/03/2018 11:45:23,28/03/2018 12:14:35,Business,8127953,6686219,6686228,8127953,ECash,DW112149,15003.15,3000,0,3000,None,Pending,,,
+UC-Individual,26/03/2018 09:32:13,26/03/2018 12:09:11,Business,2010000644,6685979,6686020,2010000644,ECash,Korean Exchange Bank,318.9,100,0,100,Refund for reference number 6685979,Pending,,,
+,,,,,,,,,,Total,14100.0,0.0,14100.0
+
+
+	
+
+
+
+
+

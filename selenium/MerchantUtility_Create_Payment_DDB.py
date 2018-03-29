@@ -33,6 +33,7 @@ def makeDDBPayment(browser, payment: Payment):
     loadURL(browser, HOST + "/PaymentForm.jsp")
     merchantUtilitySelectMerchant(browser, payment.merchantCode)
     merchantUtilityPaymentEnterAmount(browser, payment.paymentAmount)
+    fillBeneDetails(browser, payment)
     merchantTxnId = findInputValueById(browser, "txnID")
     payment.merchantRef = merchantTxnId
     merchantUtilityPaymentSubmit(browser)
