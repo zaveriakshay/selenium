@@ -29,7 +29,7 @@ def makeTopUp(browser, payment: FIPaymentMessage):
     print("Request XML:" + requestXML)
     requestXML = encryption_decyption_util.encrypteAES(requestXML)
     print("Encrypted Request XML:" + requestXML)
-    responseXML = paymentMessage(FI_WSDL, requestXML)
+    responseXML = paymentMessage(FI_WSDL, requestXML, payment.FICode)
     print("Encrypted Response XML:" + responseXML)
     responseXML = encryption_decyption_util.decryptAES(responseXML)
     print("Response XML:" + responseXML)

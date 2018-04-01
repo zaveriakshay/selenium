@@ -7,11 +7,12 @@ from Image import GifCreator
 #FI_WSDL = "http://94.200.29.187:5115/paymentZone/EPGFIService/EPGFI/EPGFIService.wsdl"
 HOST="https://www.testepg.ae/merchantUtility"
 PAYMENT_WSDL = "https://www.testepg.ae/paymentZone/PaymentService/Payment/PaymentService.wsdl"
-FI_WSDL = "https://www.testepg.ae/paymentZone/EPGFIService/EPGFI/EPGFIService.wsdl"
+#FI_WSDL = "https://www.testepg.ae/paymentZone/EPGFIService/EPGFI/EPGFIService.wsdl"
+FI_WSDL = "http://localhost:8080/paymentZone/EPGFIService/EPGFI?wsdl"
 
 XLS_Name = r"test\data\TNOQ-5173\Round1\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
-testCaseFolder = "test/data/DataCreation/Round4/"
-xlsx = testCaseFolder+'Day6_data_Preparation_refund_MR100599.xlsx'
+testCaseFolder = "test/data/"
+xlsx = testCaseFolder+'Topups_FI_Sample.xlsx'
 
 MODULE = 0
 MERCHANT_CODE = MODULE + 1

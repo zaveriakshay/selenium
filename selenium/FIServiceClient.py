@@ -31,13 +31,13 @@ def paymentDetails(wsdlUrl, requestXML):
     return responseXML
 
 
-def paymentMessage(wsdlUrl, requestXML):
+def paymentMessage(wsdlUrl, requestXML,fiCode):
     session = Session()
     session.verify = False
     transport = Transport(session=session)
     client = Client(wsdlUrl, transport=transport)
     print(client)
-    responseXML = client.service.paymentMessage(requestXML)
+    responseXML = client.service.paymentMessage(requestXML,fiCode)
     return responseXML
 
 

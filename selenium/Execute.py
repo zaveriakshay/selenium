@@ -99,16 +99,19 @@ def execute(paymentOrRefund, destinationExcelPath, destinationSheetName):
                     makeRefundAdjustment(browser, executable)
             elif isinstance(executable, FIPaymentMessage):
                 makeTopUp(browser, executable)
-        except:
+        except Exception as exception:
+            print(exception)
             pass
     saveObjectToExcel(destinationExcelPath, destinationSheetName, executable_list_, template_payment_, template_refund_,
                       templateFIPaymentMessage)
     browser.close();
+    browser.quit();
 
-
+'''
 payments = executePayment()
 payments = excelToExecutable(xlsx,'Payments')
 refundUpdateFlow(payments)
 executeRefunds()
+'''
 
-# executeFITopUps()
+executeFITopUps()
