@@ -21,6 +21,18 @@ def handleTopUpResponse(responseXML, payment: FIPaymentMessage):
     except:
         pass
 
+def handleEODResponse(responseXML, payment: FIEOD):
+    try:
+        xmlInstance = xmlObject(responseXML)
+        payment.ResponseXML = responseXML
+        errorCode = xmlInstance.findAllByXPath('Body/SrvRes/ExceptionDetails/ErrorCode')
+        payment.ResponseCode = errorCode
+        if errorCode == "EPG-PMT-000":
+            transactionRef = xmlInstance.findAllByXPath('Body/SrvRes/SubmitEODRes/BatchID')
+            payment.noqodiRef = transactionRef
+    except:
+        pass
+
 def makeTopUp(browser, payment: FIPaymentMessage):
     with open("resources/template/ChargeTopupReq.xml", "r") as xmlTemplateFile:
         xmlString = xmlTemplateFile.read()
@@ -54,4 +66,4 @@ def callEOD(browser, payment: FIEOD):
     print("Encrypted Response XML:" + responseXML)
     responseXML = encryption_decyption_util.decryptAES(responseXML)
     print("Response XML:" + responseXML)
-    handleTopUpResponse(responseXML, payment)
+    handleEODResponse(responseXML, payment)

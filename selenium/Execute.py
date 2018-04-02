@@ -106,6 +106,7 @@ def execute(paymentOrRefund, destinationExcelPath, destinationSheetName):
     template_refund_ = paymentOrRefund["templateRefund"]
     template_payment_ = paymentOrRefund["templatePayment"]
     templateFIPaymentMessage = paymentOrRefund["templateFIPaymentMessage"]
+    templateFIEOD = paymentOrRefund["templateFIEOD"]
     executable_list_ = paymentOrRefund["executableList"]
     for executable in executable_list_:
         try:
@@ -137,7 +138,7 @@ def execute(paymentOrRefund, destinationExcelPath, destinationSheetName):
             print(exception)
             pass
     saveObjectToExcel(destinationExcelPath, destinationSheetName, executable_list_, template_payment_, template_refund_,
-                      templateFIPaymentMessage,None)
+                      templateFIPaymentMessage,templateFIEOD)
     browser.close();
     browser.quit();
 

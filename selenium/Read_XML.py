@@ -50,19 +50,20 @@ class xmlObject:
         print("findAllByXPath:out:" + text)
         return text
 
-    def pushObjectToTemplate(self,executable):
+    def pushObjectToTemplate(self, executable):
         print("pushObjectToTemplate:in:")
         for elem in self.elementTree.iter():
             print(elem.text)
             try:
-                if "appendTag" in elem.attrib :
+                if "appendTag" in elem.attrib:
                     attributte = elem.attrib["appendTag"];
-                    print("attributte:"+attributte)
+                    print("attributte:" + attributte)
                     attr = getattr(executable, attributte)
-                    fromstring = ET.fromstring("<wrapper>"+str(attr)+"</wrapper>")
+                    fromstring = ET.fromstring("<wrapper>" + str(attr) + "</wrapper>")
                     for transactionElement in fromstring:
                         elem.append(transactionElement)
-                else :
+                    elem.attrib.pop("appendTag", None)
+                else:
                     attr = getattr(executable, elem.text)
                     if attr == "None" or attr == "":
                         elem.text = ""
@@ -74,8 +75,9 @@ class xmlObject:
                 pass
             print(elem.text)
         tostring = ET.tostring(self.elementTree).decode()
-        print("pushObjectToTemplate:out:"+tostring)
+        print("pushObjectToTemplate:out:" + tostring)
         return tostring
+
 
 def readXML(xmlString):
     print("readXML:in:" + xmlString)
@@ -102,5 +104,4 @@ def updateXML():
     fiEOD.TransactionXML = "<myTag></myTag>"
     xmlInstance.pushObjectToTemplate(fiEOD)
 
-
-#updateXML()
+# updateXML()
