@@ -4,9 +4,9 @@
 # url="http://94.200.29.187:5115/paymentZone/PaymentService/Payment?WSDL"
 # client = Client(url)
 # print (client)
-from FIServiceClient import paymentMessage
+from FIServiceClient import paymentMessage, submitEOD
 from MerchantUtility_Create_Payment import *
-from Read_Excel import Payment, FIPaymentMessage
+from Read_Excel import Payment, FIPaymentMessage, FIEOD
 
 
 def handleTopUpResponse(responseXML, payment: FIPaymentMessage):
@@ -40,3 +40,18 @@ def makeTopUp(browser, payment: FIPaymentMessage):
             xmlString = xmlTemplateFile.read()
         xmlInstance = xmlObject(xmlString)
         payment.TransactionXML = xmlInstance.pushObjectToTemplate(payment)
+
+
+def callEOD(browser, payment: FIEOD):
+    with open("resources/template/SubmitEODReq.xml", "r") as xmlTemplateFile:
+        xmlString = xmlTemplateFile.read()
+    xmlInstance = xmlObject(xmlString)
+    requestXML = xmlInstance.pushObjectToTemplate(payment)
+    print("Request XML:" + requestXML)
+    requestXML = encryption_decyption_util.encrypteAES(requestXML)
+    print("Encrypted Request XML:" + requestXML)
+    responseXML = submitEOD(FI_WSDL, requestXML, payment.FICode)
+    print("Encrypted Response XML:" + responseXML)
+    responseXML = encryption_decyption_util.decryptAES(responseXML)
+    print("Response XML:" + responseXML)
+    handleTopUpResponse(responseXML, payment)

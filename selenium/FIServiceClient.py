@@ -40,6 +40,15 @@ def paymentMessage(wsdlUrl, requestXML,fiCode):
     responseXML = client.service.paymentMessage(requestXML,fiCode)
     return responseXML
 
+def submitEOD(wsdlUrl, requestXML,fiCode):
+    session = Session()
+    session.verify = False
+    transport = Transport(session=session)
+    client = Client(wsdlUrl, transport=transport)
+    print(client)
+    responseXML = client.service.submitEOD(requestXML,fiCode)
+    return responseXML
+
 
 def testServiceRequest():
     xmlFile = open("test/data/filename.xml", "r")

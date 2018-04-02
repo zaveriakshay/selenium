@@ -5,6 +5,8 @@
 # client = Client(url)
 # print (client)
 import xml.etree.ElementTree as ET
+
+from Read_Excel import FIEOD
 from UserControl import *
 
 
@@ -53,12 +55,21 @@ class xmlObject:
         for elem in self.elementTree.iter():
             print(elem.text)
             try:
-                attr = getattr(executable, elem.text)
-                if attr == "None" or attr == "":
-                    elem.text = ""
-                else:
-                    elem.text = attr
-            except:
+                if "appendTag" in elem.attrib :
+                    attributte = elem.attrib["appendTag"];
+                    print("attributte:"+attributte)
+                    attr = getattr(executable, attributte)
+                    fromstring = ET.fromstring(str(attr))
+                    elem.append(fromstring)
+                else :
+                    attr = getattr(executable, elem.text)
+                    if attr == "None" or attr == "":
+                        elem.text = ""
+                    else:
+                        elem.text = attr
+
+            except Exception as exception:
+                print(exception)
                 pass
             print(elem.text)
         tostring = ET.tostring(self.elementTree).decode()
@@ -83,9 +94,12 @@ def createXML():
 
 
 def updateXML():
-    xmlString = open("test/data/filename.xml", "r")
+    xmlString = open("resources/template/SubmitEODReq.xml", "r")
     xmlInstance = xmlObject(xmlString.read())
-    xmlInstance.pushObjectToTemplate()
+    fiEOD = FIEOD()
+    fiEOD.FICode = "asdsadsad"
+    fiEOD.TransactionXML = "<myTag></myTag>"
+    xmlInstance.pushObjectToTemplate(fiEOD)
 
 
 #updateXML()

@@ -83,6 +83,22 @@ class FIPaymentMessage:
         self.isEOD = ""
         self.PaymentDate = ""
         self.TransactionXML = ""
+        self.Type = 0
+
+
+class FIEOD:
+
+    def __init__(self):
+        self.sequence = ""
+        self.FICode = ""
+        self.FITransactionID = ""
+        self.TotalTransactions = ""
+        self.TotalAmount = ""
+        self.ResponseXML = ""
+        self.ResponseCode = ""
+        self.TransactionXML = ""
+        self.Type = 0
+        self.noqodiRef = ""
 
 
 def excelToExecutable(excelPath, sheetName):
@@ -95,16 +111,22 @@ def excelToExecutable(excelPath, sheetName):
     templatePayment = {}
     templateRefund = {}
     templateFIPaymentMessage = {}
+    templateFIEOD = {}
+
     for rowIndex in range(sheet_test.min_row + 1, sheet_test.max_row + 1):
         if sheet_test.cell(row=rowIndex, column=1).value == "PAYMENT":
             executable = Payment()
             templatePayment = Payment()
-        elif "REFUND" in sheet_test.cell(row=rowIndex, column=1).value:
+        elif sheet_test.cell(row=rowIndex, column=1).value != None and "REFUND" in sheet_test.cell(row=rowIndex,
+                                                                                                   column=1).value:
             executable = Refund()
             templateRefund = Refund()
         elif sheet_test.cell(row=rowIndex, column=1).value == "FIPAYMENTMESSAGE":
             executable = FIPaymentMessage()
             templateFIPaymentMessage = FIPaymentMessage()
+        elif sheet_test.cell(row=rowIndex, column=1).value == "FIEOD":
+            executable = FIEOD()
+            templateFIEOD = FIEOD()
 
         executableList.append(executable)
         for columnIndex in range(sheet_test.min_column, sheet_test.max_column + 1):
@@ -116,6 +138,8 @@ def excelToExecutable(excelPath, sheetName):
                 setattr(templateRefund, attr_column_mapping, columnIndex)
             elif isinstance(executable, FIPaymentMessage):
                 setattr(templateFIPaymentMessage, attr_column_mapping, columnIndex)
+            elif isinstance(executable, FIEOD):
+                setattr(templateFIEOD, attr_column_mapping, columnIndex)
 
             print(attr_column_mapping + ":" + attr_column_value)
             if "bene" in attr_column_mapping:
@@ -123,12 +147,12 @@ def excelToExecutable(excelPath, sheetName):
                 executable.beneficiaryList[attr_column_mapping] = attr_column_value
             setattr(executable, attr_column_mapping, attr_column_value)
 
-    return {"templateRefund": templateRefund, "templatePayment": templatePayment,
+    return {"templateRefund": templateRefund, "templatePayment": templatePayment, "templateFIEOD": templateFIEOD,
             "templateFIPaymentMessage": templateFIPaymentMessage, "executableList": executableList}
 
 
 def saveObjectToExcel(excelPath, sheetName, executable_list_, template_payment_, template_refund_,
-                      templateFIPaymentMessage):
+                      templateFIPaymentMessage, templateFIEOD):
     wb = openpyxl.load_workbook(excelPath)
     # wb.create_sheet(index=0, title='PaymentsOutput')
     sheet_test = wb[sheetName]
@@ -150,13 +174,19 @@ def saveObjectToExcel(excelPath, sheetName, executable_list_, template_payment_,
                         print(":propertyName:>>" + str(propertyName) + "property_index_:>>" + str(property_index_))
                         rowIndex = getattr(executable, "sequence")
                         print(":propertyName:>>" + str(propertyName) + "rowIndex:>>" + str(rowIndex))
+                    elif isinstance(executable, FIEOD):
+                        property_index_ = getattr(templateFIEOD, propertyName)
+                        print(":propertyName:>>" + str(propertyName) + "property_index_:>>" + str(property_index_))
+                        rowIndex = getattr(executable, "sequence")
+                        print(":propertyName:>>" + str(propertyName) + "rowIndex:>>" + str(rowIndex))
 
-                    print(rowIndex + "<<>>" + propertyName + "<<>>" + str(property_index_) + "<<>>" + str(
+                    print(str(rowIndex) + "<<>>" + propertyName + "<<>>" + str(property_index_) + "<<>>" + str(
                         getattr(executable, propertyName)))
                     if "beneficiaryList" not in propertyName:
                         sheet_test.cell(row=int(rowIndex) + 1, column=int(str(property_index_))).value = str(
                             getattr(executable, propertyName))
-            except:
+            except Exception as exception:
+                print(exception)
                 pass
     wb.save(excelPath)
 

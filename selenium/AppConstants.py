@@ -11,8 +11,9 @@ PAYMENT_WSDL = "https://www.testepg.ae/paymentZone/PaymentService/Payment/Paymen
 FI_WSDL = "http://localhost:8080/paymentZone/EPGFIService/EPGFI?wsdl"
 
 XLS_Name = r"test\data\TNOQ-5173\Round1\Reversal_API_Single Bene_No Charges_No Adjustment_Multi_Refund.xls"
-testCaseFolder = "test/data/"
-xlsx = testCaseFolder+'Topups_FI_Sample.xlsx'
+testCaseFolder = "test/data/DataCreation/Round5/"
+#xlsx = testCaseFolder+'Day6_data_Preparation_refund.xlsx'
+xlsx = "test/data/Topups_FI_Sample.xlsx"
 
 MODULE = 0
 MERCHANT_CODE = MODULE + 1
@@ -47,5 +48,9 @@ REVERSAL_ERROR_CODE = REVERSAL_RESPONSE_XML + 1
 nowPng = testCaseFolder+r"Images/now.png"
 gifGlobalCreator = GifCreator(1, testCaseFolder+"Images/now.gif",nowPng)
 encryption_decyption_util = EncryptionDecyptionUtil()
+SHEET_NAME_PAYMENT = "Payments"
+SHEET_NAME_REFUND = "Refunds"
+SHEET_NAME_FI_TOPUP = "Topup"
+SHEET_NAME_FI_EOD = "FIEOD"
 
 print(REVERSAL_RESPONSE_XML)
