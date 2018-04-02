@@ -59,8 +59,9 @@ class xmlObject:
                     attributte = elem.attrib["appendTag"];
                     print("attributte:"+attributte)
                     attr = getattr(executable, attributte)
-                    fromstring = ET.fromstring(str(attr))
-                    elem.append(fromstring)
+                    fromstring = ET.fromstring("<wrapper>"+str(attr)+"</wrapper>")
+                    for transactionElement in fromstring:
+                        elem.append(transactionElement)
                 else :
                     attr = getattr(executable, elem.text)
                     if attr == "None" or attr == "":
