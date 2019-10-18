@@ -31,7 +31,7 @@ requests-toolbelt==0.8.0
 selenium==3.10.0
 shellescape==3.4.1
 six==1.11.0
-urllib3==1.22
+urllib3==1.24.2
 Werkzeug==0.14.1
 xlrd==1.1.0
 xlutils==2.0.0
