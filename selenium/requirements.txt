@@ -20,7 +20,7 @@ numpy==1.14.0
 openpyxl==2.5.1
 panda==0.3.1
 pandas==0.22.0
-Pillow==5.0.0
+Pillow==6.2.0
 pprint==0.1
 pycryptodome==3.5.1
 python-dateutil==2.6.1
